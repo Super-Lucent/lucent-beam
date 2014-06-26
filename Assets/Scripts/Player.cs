@@ -5,11 +5,15 @@ public class Player : MonoBehaviour {
 	
 	public string xAxis;
 	public string yAxis;
+	public KeyCode glow;
 
 	public float speed;
+	public float pullSpeed;
+	
 
 	// Use this for initialization
 	void Start () {
+
 
 	
 	}
@@ -22,7 +26,20 @@ public class Player : MonoBehaviour {
 
 		rigidbody2D.velocity = new Vector2 (x, y).normalized * speed;
 
-		
+		if (Input.GetKey(glow)) {
+
+			GameObject go = GameObject.Find ("Collect");
+
+			go.rigidbody2D.AddForce ( (transform.position - go.transform.position).normalized * pullSpeed);
+		}
+
+
+	}
+
+	void OnCollisionEnter2D(Collision2D c) {
 	
+		Beam b = GameObject.Find ("Beam").GetComponent<Beam> ();
+		b.Hit ();
+		
 	}
 }
