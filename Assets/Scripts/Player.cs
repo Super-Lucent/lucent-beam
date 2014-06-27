@@ -38,8 +38,10 @@ public class Player : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D c) {
 	
-		Beam b = GameObject.Find ("Beam").GetComponent<Beam> ();
-		b.Hit ();
+		if (!c.gameObject.CompareTag ("Wall")) {
+						Beam b = GameObject.Find ("Beam").GetComponent<Beam> ();
+						b.Hit ();
+				}
 		
 	}
 }
